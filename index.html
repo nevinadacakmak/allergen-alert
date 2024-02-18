@@ -13,12 +13,13 @@
   }
   
   input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
+    width: 50%;
+    padding: 5px;
+    margin: 10px auto;
     box-sizing: border-box;
     color: black;
-  }
+    display: block;
+}
 
   button {
     display: block;
@@ -27,9 +28,10 @@
     font-size: 16px;
     cursor: pointer;
     background-color: #007bff;
-    color: #fff;
+    color: #ffffff;
     border: none;
     border-radius: 5px;
+    font-style: oblique;
   }
 
   button:hover {
@@ -39,7 +41,8 @@
   #result {
     margin-top: 20px;
     text-align: center;
-    font-size: 24px;
+    font-size: 18px;
+    font-weight: bold;
   }
 </style>
 </head>
@@ -54,18 +57,14 @@
     </style>
 
 <h1><span style = "background-color: rgb(0, 0, 0);">Allergen Trees Finder</span></h1>
-<label for="locationInput">Enter your location:</label>
-<input type="text" id="wordInput" placeholder="e.g., Toronto, Canada">
+<input type="text" id="wordInput" placeholder="Enter a location! e.g., Toronto, Canada">
 <button onclick="searchDictionary()">Find Allergens</button>
-<style> 
-    label {
-        color: white;
-    }
-</style>
 
 <div id="result"></div>
 
-<h4>Top Allergies in Toronto</h4>
+<br>
+
+<h4><span style = "background-color: rgb(0, 0, 0);">Top Allergens in Toronto</span></h4>
    <p1>
        <dt>1- Oak</dt>
        <dt>2- Birch</dt>
@@ -78,7 +77,7 @@
     {
     font-size: 24px;
     color: white;
-    position: relative;
+    position:static;
     bottom: 1;
     right: 0;
     text-align: end;
@@ -92,7 +91,6 @@ div
     position: relative;
     bottom: 1;
     right: 0;
-    text-align: end;
     margin: 10px;
 }
 dt
@@ -107,13 +105,65 @@ dt
 }
    </style>
 
-   <button id="openLink" style="text-align: end;">More Resources</button>
+   <h1><span style = "background-color: rgb(0, 0, 0);">More Resources</span></h1>
+   <button id="openLink">Allergies & Asthma</button>
 
    <script>
     document.getElementById("openLink").addEventListener("click",function(){
         window.open("https://asthma.ca/get-help/allergies-and-asthma/managing-allergies/","https://asthma.ca/get-help/allergies-and-asthma/managing-allergies/")
     });
    </script>
+
+    <br> <!--this gives a break between buttons-->
+
+    <button id="openLink" style="text-align: end;">Walk-in Clinics in Toronto</button>
+
+    <script>
+    document.getElementById("openLink").addEventListener("click",function(){
+        window.open("https://www.torontocentralhealthline.ca/listservices.aspx?id=10072","https://www.torontocentralhealthline.ca/listservices.aspx?id=10072")
+    });
+    </script>
+
+    <br>
+
+    <button id="openLink" style="text-align: end;">Tips to Avoid Allergens</button>
+
+    <script>
+        document.getElementById("openLink").addEventListener("click",function(){
+            window.open("https://aafa.org/allergies/prevent-allergies/","https://aafa.org/allergies/prevent-allergies/")
+        });
+        </script>
+
+    <h2>Facts!</h2>
+    <style>
+        h2 {
+        text-align: right;
+        color: #ffffff;
+        }
+    </style>
+
+<style>
+    /* Existing styles */
+    
+    #result {
+      /* Other styles */
+      text-align: center; /* Center-align the content inside the #result div */
+    }
+    
+    #result p {
+      text-align: center; /* Left-align the content inside the <p> tag within #result */
+    }
+  </style>
+
+    <p>On windy days, pollen from trees, grasses, and weeds can spread over large distances.<br>This can be particularly challenging for individuals who are sensitive to pollen. <br><br>Raindrops can capture airborne pollen and bring it down to the ground.<br>which results in decreased pollen levels after rainfall. <br><br>During the warmer months of the year, plants are more active and produce more pollen.<br>Conversely, the colder months usually witness a decline in active pollen production.
+    </p>
+
+    <style>
+        p {
+            text-align: right;
+            color: white;
+        }
+    </style>
 
 <script>
     // Sample dictionary  
@@ -124,9 +174,9 @@ dt
         const word = document.getElementById('wordInput').value.toLowerCase();
         if (word in dictionary) {
             const items = dictionary[word];
-            document.getElementById('result').innerHTML = `<span style="color: white;"><p>Allergens for word "${word}":</p><ul>${items.map(item => `<li>${item}</li>`).join('')}</ul></span>`;
+            document.getElementById('result').innerHTML = `<span style="color: white;"><p>Possible allergens in the area "${word}":</p><ul style="list-style: none;">${items.map(item => `<li>${item}</li>`).join('')}</ul></span>`;
         } else {
-            document.getElementById('result').textContent = `<span style='color: white;'>Word "${word}" not found in the area.</span>`;
+            document.getElementById('result').innerHTML = `<span style="color: white;"><p>Area "${word}" is not in the data.</p></span>`;
         }
     }
 </script>
